@@ -1,0 +1,30 @@
+ ol.list {
+    list-style-type: none;
+    margin: 0;
+    margin-left: 3em;
+    padding: 0;  
+    counter-reset: li-counter;
+}
+ol.list > li{
+    position: relative;
+    margin-bottom: 10px;
+    padding-left: 0.5em;
+    min-height: 1.5em;
+    border-left: 2px solid #CCCCCC;
+}
+
+ol.list > li:before {
+    position: absolute;
+    top: 0;
+    left: -1em;
+    width: 0.8em;
+     
+    font-size: 1.5em;
+    line-height: 1;
+    font-weight: bold;
+    text-align: right;
+    color: #464646;
+ 
+    content: counter(li-counter);
+    counter-increment: li-counter;
+}

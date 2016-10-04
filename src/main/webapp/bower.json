@@ -1,0 +1,22 @@
+{
+  "name": "AngularSeed for 3. semester Computer Science at cphbusiness",
+  "version": "0.0.0",
+  "authors": [
+    "LMO <lam@cphbusiness.dk>"
+  ],
+  "description": "Semesterseed for exercises and project",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.5.2",
+    "angular-route": "^1.5.2",
+    "angular-animate": "^1.5.2",
+    "angular-bootstrap": "^1.2.5",
+    "angular-jwt": "^0.0.9"
+  }
+}
