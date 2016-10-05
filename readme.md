@@ -134,6 +134,7 @@
 
     </uib-accordion-group>
     <uib-accordion-group heading="Exercises" >
+      <h2>Exercise</h2>
       <h3>Adding the missing REST integration Tests</h3>
       <p>Todo --> Remove some of the tests and them as an exercise here</p>
       <h3>Make a new page</h3>
