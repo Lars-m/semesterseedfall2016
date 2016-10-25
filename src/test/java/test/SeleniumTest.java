@@ -21,9 +21,10 @@ import test.utils.SeleniumUtil;
 public class SeleniumTest {
 
     private static final int SERVER_PORT = 8888;
-    private static final String APP_CONTEXT = "/app";
+    private static final String APP_CONTEXT = "/seed";
     private static final String BASE_URL = "http://localhost:" + SERVER_PORT + APP_CONTEXT;
     private static final String USER_DIR = System.getProperty("user.dir");
+    private static final String WAR_PATH = "/target/seedMaven-1.0-SNAPSHOT.war";
 
     private static HtmlUnitDriver driver;
     private static EmbeddedServerFull server;
@@ -32,13 +33,10 @@ public class SeleniumTest {
     public static void setUpBeforeAll() throws LifecycleException {
         // Start a server with the given .war file which runs on port 888 and
         // exposes the server on the URL path /app
-        server = EmbeddedServerFull
-                .start(USER_DIR + "/target/seedMaven-1.0-SNAPSHOT.war",
-                        8888, "/app");
+        server = EmbeddedServerFull.start(USER_DIR + WAR_PATH ,SERVER_PORT, APP_CONTEXT,null);
         // Start the Selenium framework and pretend we're Firefox
         // If we don't, Angular will fallback to IE and fail
         driver = new HtmlUnitDriver(BrowserVersion.FIREFOX_38);
-        // Enable JavaScript
         driver.setJavascriptEnabled(true);
     }
 
@@ -46,7 +44,6 @@ public class SeleniumTest {
     public void testBrowser() {
         // Access the url and assert that the title is as expected
         driver.get(BASE_URL);
-        System.out.println(driver.findElementByName("body"));
         assertEquals("My AngularJS App", driver.getTitle());
     }
 
