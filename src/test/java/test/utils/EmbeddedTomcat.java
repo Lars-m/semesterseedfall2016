@@ -35,7 +35,7 @@ public class EmbeddedTomcat {
     tomcat = new Tomcat();
 
     new File("WebContent").mkdir();
-
+    
     // new java.io.File("tmp").mkdir();
     tomcat.setBaseDir(TMP_DIR);
     tomcat.setPort(port);
