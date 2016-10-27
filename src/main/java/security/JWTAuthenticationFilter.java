@@ -51,7 +51,6 @@ public class JWTAuthenticationFilter implements ContainerRequestFilter {
         if (tokenIsExpired(token)) {
            throw new NotAuthorizedException("Your authorization token has timed out, please login again",Response.Status.UNAUTHORIZED);
         }
-
         String username = getUsernameFromToken(token);
         final UserPrincipal user = getPricipalByUserId(username);
         if (user == null) {

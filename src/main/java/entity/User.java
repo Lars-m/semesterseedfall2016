@@ -1,51 +1,76 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import security.IUser;
+import security.PasswordStorage;
 
-public class User implements IUser{
+@Entity(name = "SEED_USER")
+public class User implements IUser, Serializable{
+ 
+  private String passwordHash; 
   
-  private String password;  //Pleeeeease dont store me in plain text
+  @Id
   private String userName;
-  List<String> roles = new ArrayList();
+  
+  @ManyToMany
+  List<Role> roles;
 
-  public User(String userName, String password) {
+  public User() {
+  }
+
+  public User(String userName, String password) throws PasswordStorage.CannotPerformOperationException {
     this.userName = userName;
-    this.password = password;
+    this.passwordHash = PasswordStorage.createHash(password);
   }
   
-  public User(String userName, String password,List<String> roles) {
-    this.userName = userName;
-    this.password = password;
-    this.roles = roles;
-  }
+//  public User(String userName, String passwordHash,List<String> roles) {
+//    this.userName = userName;
+//    this.passwordHash = passwordHash;
+//    //this.roles = roles;
+//  }
   
-  public void addRole(String role){
+  public void addRole(Role role){
+    if(roles == null){
+      roles = new ArrayList();
+    }
     roles.add(role);
+    role.addUser(this);
+  }
+  
+  public List<Role> getRoles(){
+    return roles;
   }
     
   @Override
   public List<String> getRolesAsStrings() {
-   return roles;
+   if (roles.isEmpty()) {
+            return null;
+        }
+        List<String> rolesAsStrings = new ArrayList();
+        for (Role role : roles) {
+            rolesAsStrings.add(role.getRoleName());
+        }
+        return rolesAsStrings;
   }
  
+  @Override
   public String getPassword() {
-    return password;
+    return passwordHash;
+  }
+  
+
+  public void setPassword(String password) throws PasswordStorage.CannotPerformOperationException {
+    this.passwordHash = PasswordStorage.createHash(password);
   }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
+  @Override
   public String getUserName() {
     return userName;
   }
-
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
-
- 
-          
+     
 }
