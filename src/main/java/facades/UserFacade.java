@@ -15,8 +15,7 @@ public class UserFacade implements IUserFacade {
   EntityManagerFactory emf;
 
   public UserFacade(EntityManagerFactory emf) {
-    this.emf = emf;
-    
+    this.emf = emf;   
   }
 
   private EntityManager getEntityManager() {

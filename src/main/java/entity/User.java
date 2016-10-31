@@ -19,7 +19,7 @@ public class User implements IUser, Serializable{
   
   @ManyToMany
   List<Role> roles;
-
+ 
   public User() {
   }
 

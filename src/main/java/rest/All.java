@@ -38,6 +38,7 @@ public class All {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public String getText() {
+    System.out.println("XXXXXXXX---> "+System.getProperty("java.version"));
     return " {\"message\" : \"result for all\"}";
   }
 
