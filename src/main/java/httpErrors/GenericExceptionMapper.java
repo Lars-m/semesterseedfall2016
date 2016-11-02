@@ -4,7 +4,10 @@ package httpErrors;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletContext;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -21,6 +24,7 @@ public class GenericExceptionMapper implements ExceptionMapper<Exception> {
 
   @Override
   public Response toResponse(Exception ex) {
+    Logger.getLogger(GenericExceptionMapper.class.getName()).log(Level.SEVERE, null, ex);
     JsonObject error = new JsonObject();
     JsonObject errorDetail = new JsonObject();
     int statusCode = 500;
